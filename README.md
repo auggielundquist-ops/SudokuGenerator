@@ -17,7 +17,6 @@ public class SudokuGenerator {
         s.display();
     }
 
-    // initializes board with zeros (not really needed but kept)
     public void makeBoard() {
         for (int r = 0; r < 9; r++) {
             for (int c = 0; c < 9; c++) {
@@ -26,7 +25,6 @@ public class SudokuGenerator {
         }
     }
 
-    // creates list 1–9
     public ArrayList<Integer> makeBaseList() {
         ArrayList<Integer> nums = new ArrayList<Integer>();
 
@@ -34,12 +32,10 @@ public class SudokuGenerator {
             nums.add(i);
         }
 
-        // homemade shuffle (not perfect but works)
         for (int i = 0; i < nums.size(); i++) {
 
             int randomIndex = (int)(Math.random() * 9);
 
-            // swap values
             int temp = nums.get(i);
             nums.set(i, nums.get(randomIndex));
             nums.set(randomIndex, temp);
@@ -48,7 +44,6 @@ public class SudokuGenerator {
         return nums;
     }
 
-    // fills board using pattern
     public void fillBoard() {
 
         ArrayList<Integer> base = makeBaseList();
@@ -70,7 +65,6 @@ public class SudokuGenerator {
         }
     }
 
-    // calculates shift
     public int getShiftValue(int row) {
 
         int part1 = row * 3;
@@ -85,7 +79,6 @@ public class SudokuGenerator {
         return result;
     }
 
-    // prints board
     public void display() {
 
         for (int i = 0; i < 9; i++) {
