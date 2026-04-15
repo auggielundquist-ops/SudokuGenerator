@@ -1,104 +1,19 @@
-import java.util.ArrayList;
+A simple Sudoku puzzle generator built in Java. This project generates a randomized Sudoku board using basic logic and prints it to the console.
 
-public class SudokuGenerator {
+Features:
+Generates a valid 9x9 Sudoku board
+Ensures rows, columns, and 3x3 boxes follow Sudoku rules
+Randomized number placement for varied puzzles
+Console-based output (no GUI)
 
-    int[][] board;
+How it works:
+The program uses a backtracking algorithm to fill the Sudoku grid one cell at a time. It checks whether placing a number is valid based on:
 
-    public SudokuGenerator() {
-        board = new int[9][9];
-    }
+Row constraints
+Column constraints
+3x3 subgrid constraints
+If a placement leads to a dead end, it backtracks and tries a different number.
 
-    public static void main(String[] args) {
-
-        SudokuGenerator s = new SudokuGenerator();
-
-        s.makeBoard();
-        s.fillBoard();
-        s.display();
-    }
-
-    public void makeBoard() {
-        for (int r = 0; r < 9; r++) {
-            for (int c = 0; c < 9; c++) {
-                board[r][c] = 0;
-            }
-        }
-    }
-
-    public ArrayList<Integer> makeBaseList() {
-        ArrayList<Integer> nums = new ArrayList<Integer>();
-
-        for (int i = 1; i <= 9; i++) {
-            nums.add(i);
-        }
-
-        for (int i = 0; i < nums.size(); i++) {
-
-            int randomIndex = (int)(Math.random() * 9);
-
-            int temp = nums.get(i);
-            nums.set(i, nums.get(randomIndex));
-            nums.set(randomIndex, temp);
-        }
-
-        return nums;
-    }
-
-    public void fillBoard() {
-
-        ArrayList<Integer> base = makeBaseList();
-
-        for (int row = 0; row < 9; row++) {
-
-            int shift = getShiftValue(row);
-
-            for (int col = 0; col < 9; col++) {
-
-                int index = col + shift;
-
-                while (index >= 9) {
-                    index = index - 9;
-                }
-
-                board[row][col] = base.get(index);
-            }
-        }
-    }
-
-    public int getShiftValue(int row) {
-
-        int part1 = row * 3;
-        int part2 = row / 3;
-
-        int result = part1 + part2;
-
-        while (result >= 9) {
-            result = result - 9;
-        }
-
-        return result;
-    }
-
-    public void display() {
-
-        for (int i = 0; i < 9; i++) {
-
-            if (i == 0 || i == 3 || i == 6) {
-                System.out.println("+-------+-------+-------+");
-            }
-
-            for (int j = 0; j < 9; j++) {
-
-                if (j == 0 || j == 3 || j == 6) {
-                    System.out.print("| ");
-                }
-
-                System.out.print(board[i][j] + " ");
-            }
-
-            System.out.println("|");
-        }
-
-        System.out.println("+-------+-------+-------+");
-    }
-}
+How to run:
+Copy/Paste the repository and open the file and you should be able to run the program!
+   git clone https://github.com/your-username/sudoku-generator.git
